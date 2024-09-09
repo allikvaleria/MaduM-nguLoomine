@@ -24,17 +24,8 @@ namespace MaduMänguLoomine
 
             //Punktide joonistamine
             Point p = new Point(4,5, '*');
-            p.Draw();
-
-
-            Point p1 = new Point(1,3,'*');
-            p1.Draw();
-
-            Point p2 = new Point(4,5,'#');
-            p2.Draw();
-
-            HorizontalLine line = new HorizontalLine(5, 10, 8, '+');
-            line.Drow();
+            Snake snake = new Snake(p, 4, Direction.Right);
+            snake.Drow();
 
 
             Console.ReadLine();
