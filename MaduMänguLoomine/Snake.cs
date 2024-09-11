@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MaduMänguLoomine
 {
@@ -39,5 +40,17 @@ namespace MaduMänguLoomine
             nextPoint.Move(1, direction);
             return nextPoint;
         }
+        public void HandleKey(ConsoleKey key)
+        {
+            if (key == ConsoleKey.LeftArrow)
+                direction = Direction.Left;
+            else if (key == ConsoleKey.RightArrow)
+                direction = Direction.Right;
+            else if (key == ConsoleKey.UpArrow)
+                direction = Direction.Up;
+            else if (key == ConsoleKey.DownArrow)
+                direction = Direction.Down;
+        }
+
     }
 }

@@ -30,11 +30,6 @@ namespace MaduMänguLoomine
             sym = p.sym;
         }
 
-        public void Draw()
-        {
-            Console.SetCursorPosition(x, y);
-            Console.Write(sym);
-        }
         internal void Move(int offset, Direction direction)
         {
             if (direction == Direction.Right)
@@ -47,12 +42,17 @@ namespace MaduMänguLoomine
             }
             else if (direction == Direction.Up)
             {
-                y = y + offset;
+                y = y - offset;
             }
             else if (direction == Direction.Down)
             {
-                y = y - offset;
+                y = y + offset;
             }
+        }
+        public void Draw()
+        {
+            Console.SetCursorPosition(x,y);
+            Console.Write(sym);
         }
         public void Clear()
         {
