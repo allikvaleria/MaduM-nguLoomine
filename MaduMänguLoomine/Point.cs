@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaduMänguLoomine
 {
-    internal class Point
+    public class Point
     {
         public int x;
         public int y;
@@ -30,7 +30,12 @@ namespace MaduMänguLoomine
             sym = p.sym;
         }
 
-        public void Move(int offset, Direction direction)
+        public void Draw()
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(sym);
+        }
+        internal void Move(int offset, Direction direction)
         {
             if (direction == Direction.Right)
             {
@@ -49,11 +54,10 @@ namespace MaduMänguLoomine
                 y = y - offset;
             }
         }
-
-        public void Draw()
+        public void Clear()
         {
-            Console.SetCursorPosition(x, y);
-            Console.Write(sym);
+            sym = ' ';
+            Draw();
         }
         public override string ToString()
         {

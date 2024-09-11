@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaduMänguLoomine
 {
-    internal class Figure
+    public class Figure
     {
         protected List<Point> pList; //protected - Et muutuv pList oleks pärijatel nähtav
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaduMänguLoomine
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -26,9 +26,21 @@ namespace MaduMänguLoomine
             Point p = new Point(4,5, '*');
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Drow();
+            snake.Move();
+            Thread.Sleep(300);
+            snake.Move();
+            Thread.Sleep(300);
+            snake.Move();
+            Thread.Sleep(300);
+            snake.Move();
+            Thread.Sleep(300);
+            snake.Move();
+            Thread.Sleep(300);
+            snake.Move();
+            Thread.Sleep(300);
+            snake.Move();
 
 
-            Console.ReadLine();
         }
     }
 }

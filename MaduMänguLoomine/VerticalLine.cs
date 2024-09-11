@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaduMänguLoomine
 {
-    internal class VerticalLine : Figure
+    public class VerticalLine : Figure
     {
         public VerticalLine(int yUp, int yDown, int x, char sym)
         {
