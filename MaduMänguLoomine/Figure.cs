@@ -10,7 +10,7 @@ namespace MaduMänguLoomine
     {
         protected List<Point> pList; //protected - Et muutuv pList oleks pärijatel nähtav
 
-        public void Drow()
+        public virtual void Drow()
         {
             foreach (Point p in pList)
             {
