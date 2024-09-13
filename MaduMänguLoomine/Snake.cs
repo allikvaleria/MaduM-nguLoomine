@@ -40,6 +40,19 @@ namespace MaduMänguLoomine
             nextPoint.Move(1, direction);
             return nextPoint;
         }
+
+        internal bool IsHitTail()
+        {
+            var head = pList.Last();
+            for (int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+            }
+            return false;
+        }
+
+
         public void HandleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
@@ -53,7 +66,7 @@ namespace MaduMänguLoomine
         }
         internal bool Eat(Point food)
         {
-            Point head=GetNextPoint();
+            Point head = GetNextPoint();
             if (head.IsHit(food))
             {
                 food.sym = head.sym;
@@ -61,9 +74,7 @@ namespace MaduMänguLoomine
                 return true;
             }
             else
-            {
                 return false;
-            }
         }
     }
 }
