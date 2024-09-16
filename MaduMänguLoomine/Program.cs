@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NAudio;
+using NAudio.Wave;
 
 namespace MaduMänguLoomine
 {
@@ -33,6 +35,14 @@ namespace MaduMänguLoomine
                 {
                     food = foodCreator.CreateFood();
                     food.Draw();
+
+
+                    //Esimene iseseisev uue funktsiooni lisamine koodi - Heli lisamine
+
+                    IWavePlayer kusanie = new WaveOutEvent();
+                    AudioFileReader file = new AudioFileReader("../../../ukus.mp3");
+                    kusanie.Init(file);
+                    kusanie.Play();
                 }
                 else
                 {
@@ -45,6 +55,8 @@ namespace MaduMänguLoomine
                     snake.HandleKey(key.Key);
                 }
             }
+
+  
         }
     }
 }
