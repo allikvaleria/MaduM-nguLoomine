@@ -18,12 +18,5 @@ namespace MaduMänguLoomine
                 pList.Add(p);
             }
         }
-        public override void Draw()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-
-            //base.Drow();
-            Console.ForegroundColor = ConsoleColor.White;
-        }
     }
 }

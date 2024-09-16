@@ -16,7 +16,7 @@ namespace MaduMänguLoomine
 
             //Punktide joonistamine 
             Point p = new Point(4, 5, '*');
-            Figure snake = new Snake(p, 4, Direction.Right);
+            Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
 
             FoodCreator foodCreator = new FoodCreator(80, 25, '¤');
