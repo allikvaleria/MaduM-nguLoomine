@@ -40,7 +40,7 @@ namespace MaduMänguLoomine
                     //Esimene iseseisev uue funktsiooni lisamine koodi - Heli lisamine
 
                     IWavePlayer kusanie = new WaveOutEvent();
-                    AudioFileReader file = new AudioFileReader("../../../ukus.mp3");
+                    AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
                     kusanie.Init(file);
                     kusanie.Play();
                 }
@@ -55,8 +55,6 @@ namespace MaduMänguLoomine
                     snake.HandleKey(key.Key);
                 }
             }
-
-  
         }
     }
 }

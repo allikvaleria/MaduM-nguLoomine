@@ -18,5 +18,7 @@ namespace MaduMänguLoomine
                 pList.Add(p);
             }
         }
+
+        
     }
 }

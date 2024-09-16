@@ -30,6 +30,11 @@ namespace MaduMänguLoomine
             Point head = GetNextPoint();
             pList.Add(head);
 
+
+            //Teine iseseisev uue funktsiooni lisamine koodi.
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            base.Draw();
             tail.Clear();
             head.Draw();
         }
@@ -77,5 +82,8 @@ namespace MaduMänguLoomine
             else
                 return false;
         }
+
+        
+
     }
 }
