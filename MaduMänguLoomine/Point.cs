@@ -12,6 +12,8 @@ namespace MaduMänguLoomine
         public int y;
         public char sym;
 
+
+
         public Point() 
         {
         }
@@ -21,6 +23,7 @@ namespace MaduMänguLoomine
             this.x = x;
             this.y = y;
             this.sym = sym;
+            
         }
 
         public Point(Point p) //for Snake
@@ -28,6 +31,7 @@ namespace MaduMänguLoomine
             x=p.x;
             y=p.y;
             sym = p.sym;
+            
         }
 
         internal void Move(int offset, Direction direction)

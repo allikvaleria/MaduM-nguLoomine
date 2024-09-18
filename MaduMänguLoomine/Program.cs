@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using NAudio;
 using NAudio.Wave;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace MaduMänguLoomine
 {
@@ -12,12 +14,17 @@ namespace MaduMänguLoomine
     {
         static void Main(string[] args)
         {
+            Console.Write("Sisesta oma nimi: ");
+            string playerName = Console.ReadLine();
+            int score = 0;
+            Players player = new Players(playerName, score);
+
             Console.SetWindowSize(80, 25);
             Walls walls = new Walls(80, 25);
             walls.Draw();
 
             //Punktide joonistamine 
-            Point p = new Point(4, 5, '*');
+            Point p = new Point(4, 5, '=');
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
 
@@ -55,6 +62,11 @@ namespace MaduMänguLoomine
                     snake.HandleKey(key.Key);
                 }
             }
+            
+            player = new Players(playerName, score);
+            Console.WriteLine($"\nMäng läbi, {playerName}! Sinu lõpptulemus on {score} punkti.");
+            Console.WriteLine($"\nTulemused salvestatud. Aitäh, et mängisite!");
+            Console.ReadLine();
         }
     }
 }
