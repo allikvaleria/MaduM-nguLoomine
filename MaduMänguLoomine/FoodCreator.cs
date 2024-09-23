@@ -8,23 +8,35 @@ namespace MaduMänguLoomine
 {
     class FoodCreator
     {
-        int mapWidht;
-        int mapHeight;
-        char sym;
+        private int mapWidht;
+        private int mapHeight;
+        private char[] foodSymbols;
 
+        Random Random = new Random();
 
-        Random random = new Random();
-        public FoodCreator(int mapWidht, int mapHeight, char sym)
+        public FoodCreator(int mapWidht, int mapHeight, char[] food_Symbols)
         {
             this.mapWidht = mapWidht;
             this.mapHeight = mapHeight;
-            this.sym = sym;
+            this.foodSymbols = food_Symbols;
         }
+
         public Point CreateFood()
         {
-            int x = random.Next(2, mapWidht - 2);
-            int y = random.Next(2, mapHeight - 2);
-            return new Point(x, y, sym);
+            int x = Random.Next(2, mapWidht - 2);
+            int y = Random.Next(4, mapHeight - 2);
+            char foodSymbol = foodSymbols[Random.Next(foodSymbols.Length)];
+            return new Point(x, y, foodSymbol);
+        }
+
+        public List<Point> food_for_snake(int count)
+        {
+            List<Point> foodItems = new List<Point>();
+            for (int i = 0; i < count; i++)
+            {
+                foodItems.Add(CreateFood());
+            }
+            return foodItems;
         }
     }
 }

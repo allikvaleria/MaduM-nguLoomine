@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,59 +9,33 @@ namespace MaduMänguLoomine
 {
     internal class Players
     {
-        private string Nimi;
-        private int Tulemus;
-        public Players(string nimi, int tulemus)
-        {
-            this.Nimi = nimi;
-            this.Tulemus = tulemus;
-            SaveResult();
-        }
-
-
-        private void SaveResult()
+        private string fail = @"..\..\..\Nimi.txt"; 
+        public void Salvesta_faili(string playerName, Score scored_)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(@"..\..\..\Nimi.txt", true))
+                using (StreamWriter sw = new StreamWriter(fail, true))
                 {
-                    writer.WriteLine($"{Nimi}: {Tulemus} result");
+                    sw.WriteLine($"{playerName}: {scored_.Tulemus()} points");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Faili salvestamine ebaõnnestus");
+                Console.WriteLine(ex);
             }
         }
-
-
-        public static void DisplayResults()
+        public void Naitab_faili()
         {
             try
             {
-                if (File.Exists(@"..\..\..\Nimi.txt"))
-                {
-                    Console.WriteLine("\nSalvestatud tulemused:");
-
-                    using (StreamReader reader = new StreamReader(@"..\..\..\Nimi.txt"))
-                    {
-                        string line;
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            Console.WriteLine(line);
-                        }
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Tulemuste fail puudub.");
-                }
+                StreamReader sr = new StreamReader(fail);
+                string lines = sr.ReadToEnd();
+                Console.WriteLine(lines);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Tulemuste lugemine ebaõnnestus");
+                Console.WriteLine(e);
             }
-            
         }
     }
 }

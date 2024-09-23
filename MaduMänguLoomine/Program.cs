@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -14,11 +15,22 @@ namespace MaduMänguLoomine
     {
         static void Main(string[] args)
         {
+            Players players = new Players();
+            Console.WriteLine("Start game? (1 - Yes, 2 - No)");
+            string userInput = Console.ReadLine();
             Console.Write("Sisesta oma nimi: ");
             string playerName = Console.ReadLine();
-            int score = 0;
-            Players player = new Players(playerName, score);
+            Start start = new Start();
+            Console.ReadLine();
+            Console.Clear();
 
+            Score score = new Score();
+        
+
+            
+            
+
+            
             Console.SetWindowSize(80, 25);
             Walls walls = new Walls(80, 25);
             walls.Draw();
@@ -28,7 +40,9 @@ namespace MaduMänguLoomine
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
 
-            FoodCreator foodCreator = new FoodCreator(80, 25, '¤');
+            char[] food_Symbols = { '♠', '♣', '♥', '♦' };
+            FoodCreator foodCreator = new FoodCreator(80, 25, food_Symbols);
+            List<Point> foodItems = foodCreator.food_for_snake(4);
             Point food = foodCreator.CreateFood();
             food.Draw();
 
@@ -36,7 +50,23 @@ namespace MaduMänguLoomine
             {
                 if (walls.IsHit(snake) || snake.IsHitTail())
                 {
+                    
+                    players.Salvesta_faili(playerName, score);
                     break;
+                }
+                for (int i = 0; i < foodItems.Count; i++)
+                {
+                    if (snake.Eat(foodItems[i]))
+                    {
+                        score.Score_points(foodItems[i].sym);
+                        score.Scored();
+
+
+                        //Kui toit on söödud, loome selle uude kohta (Если еда съедена, создаём её на новом месте)
+                        Point newFood = foodCreator.CreateFood();
+                        foodItems[i] = newFood;
+                        newFood.Draw();
+                    }
                 }
                 if (snake.Eat(food))
                 {
@@ -46,10 +76,10 @@ namespace MaduMänguLoomine
 
                     //Esimene iseseisev uue funktsiooni lisamine koodi - Heli lisamine
 
-                    IWavePlayer kusanie = new WaveOutEvent();
-                    AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
-                    kusanie.Init(file);
-                    kusanie.Play();
+                    //IWavePlayer kusanie = new WaveOutEvent();
+                    //AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
+                    //kusanie.Init(file);
+                    //kusanie.Play();
                 }
                 else
                 {
@@ -57,16 +87,17 @@ namespace MaduMänguLoomine
                 }
                 Thread.Sleep(100);
                 if (Console.KeyAvailable)
+
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
             }
+            Console.Clear();
             
-            player = new Players(playerName, score);
-            Console.WriteLine($"\nMäng läbi, {playerName}! Sinu lõpptulemus on {score} punkti.");
-            Console.WriteLine($"\nTulemused salvestatud. Aitäh, et mängisite!");
-            Console.ReadLine();
+            players.Naitab_faili();
+
+
         }
     }
 }
