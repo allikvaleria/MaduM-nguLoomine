@@ -23,8 +23,9 @@ namespace MaduMänguLoomine
             string playerName = Console.ReadLine();
             Start start = new Start();
             Console.ReadLine();
-            
+
             Score score = new Score();
+
 
             Console.Clear();
 
@@ -47,7 +48,7 @@ namespace MaduMänguLoomine
             {
                 if (walls.IsHit(snake) || snake.IsHitTail())
                 {
-                    
+
                     players.Salvesta_faili(playerName, score);
                     break;
                 }
@@ -55,30 +56,26 @@ namespace MaduMänguLoomine
                 {
                     if (snake.Eat(foodItems[i]))
                     {
-                        // Подсчет очков
                         score.Score_points(foodItems[i].sym);
-                        score.Scored(); // Вывод на экран
-
-                        // Генерация новой еды в свободной точке
-                        Point newFood;
-                        do
-                        {
-                            newFood = foodCreator.CreateFood();
-                        }
-                        while (snake.IsOnSnake(newFood) || walls.IsHit(newFood)); // Проверяем, что новая еда не на змее или стенах
-
+                        score.Scored();
+                        //Kui toit on söödud, loome selle uude kohta (Если еда съедена, создаём её на новом месте)
+                        Point newFood = foodCreator.CreateFood();
                         foodItems[i] = newFood;
-                        newFood.Draw(); // Отрисовка новой еды
-
-                        // Воспроизведение звука (раскомментируйте при необходимости)
-                        // IWavePlayer kusanie = new WaveOutEvent();
-                        // AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
-                        // kusanie.Init(file);
-                        // kusanie.Play();
+                        newFood.Draw();
+                        food = foodCreator.CreateFood();
+                        food.Draw();
                     }
-
                 }
+                if (snake.Eat(food))
+                {
+                    
 
+                    
+                    IWavePlayer kusanie = new WaveOutEvent();
+                    AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
+                    kusanie.Init(file);
+                    kusanie.Play();
+                }
                 snake.Move();
                 Thread.Sleep(100);
                 if (Console.KeyAvailable)
@@ -90,10 +87,10 @@ namespace MaduMänguLoomine
             }
             Console.Clear();
             players.Naitab_faili();
-
-
         }
     }
 }
+
+
 
 

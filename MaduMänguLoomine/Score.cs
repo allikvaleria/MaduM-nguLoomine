@@ -33,7 +33,7 @@ namespace MaduMänguLoomine
             }
             else
             {
-                Console.WriteLine("Viga");
+                score = 0;
             }
 
         }

@@ -42,7 +42,7 @@ namespace MaduMänguLoomine
         public Point GetNextPoint()
         {
             Point head = pList.Last();
-            pList.Last().sym = 'o';
+            pList.Last().sym = '=';
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
             return nextPoint;
@@ -84,17 +84,7 @@ namespace MaduMänguLoomine
                 return false;
         }
 
-        public bool IsOnSnake(Point point)
-        {
-            foreach (var p in _snake)
-            {
-                if (p.IsHit(point))
-                {
-                    return true; // Точка находится на змее
-                }
-            }
-            return false; // Точка не на змее
-        }
+        
 
     }
 }
