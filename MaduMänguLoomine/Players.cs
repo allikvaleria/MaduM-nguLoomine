@@ -29,15 +29,14 @@ namespace MaduMänguLoomine
         {
             try
             {
-                using (StreamReader sr = new StreamReader(fail))
-                {
-                    string lines = sr.ReadToEnd();
-                    Console.WriteLine(lines);
-                }
+                StreamReader sr = new StreamReader(fail);
+                string lines = sr.ReadToEnd();
+                Console.WriteLine(lines);
+                
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
             }
         }
     }
