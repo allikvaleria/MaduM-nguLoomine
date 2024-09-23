@@ -13,7 +13,7 @@ namespace MaduMänguLoomine
         {
             score = 0;
         }
-        public void Score_points(int Food) 
+        public void Score_points(char Food) 
         {
             if (Food == '♠')
             {

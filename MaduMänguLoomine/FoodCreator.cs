@@ -24,7 +24,7 @@ namespace MaduMänguLoomine
         public Point CreateFood()
         {
             int x = Random.Next(2, mapWidht - 2);
-            int y = Random.Next(4, mapHeight - 2);
+            int y = Random.Next(2, mapHeight - 2);
             char foodSymbol = foodSymbols[Random.Next(foodSymbols.Length)];
             return new Point(x, y, foodSymbol);
         }

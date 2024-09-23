@@ -10,6 +10,7 @@ namespace MaduMänguLoomine
     internal class Players
     {
         private string fail = @"..\..\..\Nimi.txt"; 
+        public Players() { }
         public void Salvesta_faili(string playerName, Score scored_)
         {
             try
@@ -28,13 +29,15 @@ namespace MaduMänguLoomine
         {
             try
             {
-                StreamReader sr = new StreamReader(fail);
-                string lines = sr.ReadToEnd();
-                Console.WriteLine(lines);
+                using (StreamReader sr = new StreamReader(fail))
+                {
+                    string lines = sr.ReadToEnd();
+                    Console.WriteLine(lines);
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
             }
         }
     }

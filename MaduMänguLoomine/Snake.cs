@@ -34,7 +34,7 @@ namespace MaduMänguLoomine
             //Teine iseseisev uue funktsiooni lisamine koodi.
 
             Console.ForegroundColor = ConsoleColor.Cyan;
-            base.Draw();
+
             tail.Clear();
             head.Draw();
         }
@@ -42,6 +42,7 @@ namespace MaduMänguLoomine
         public Point GetNextPoint()
         {
             Point head = pList.Last();
+            pList.Last().sym = 'o';
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
             return nextPoint;
@@ -83,7 +84,17 @@ namespace MaduMänguLoomine
                 return false;
         }
 
-        
+        public bool IsOnSnake(Point point)
+        {
+            foreach (var p in _snake)
+            {
+                if (p.IsHit(point))
+                {
+                    return true; // Точка находится на змее
+                }
+            }
+            return false; // Точка не на змее
+        }
 
     }
 }
