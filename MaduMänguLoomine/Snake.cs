@@ -9,7 +9,7 @@ namespace MaduMänguLoomine
 {
     class Snake : Figure
     {
-        Direction direction;
+        public Direction direction;
 
         public Snake(Point tail, int length, Direction _direction)
         {
@@ -30,13 +30,11 @@ namespace MaduMänguLoomine
             Point head = GetNextPoint();
             pList.Add(head);
 
-
-            //Teine iseseisev uue funktsiooni lisamine koodi.
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-
             tail.Clear();
             head.Draw();
+
+            //Teine iseseisev uue funktsiooni lisamine koodi.
+            Console.ForegroundColor = ConsoleColor.Cyan;
         }
 
         public Point GetNextPoint()
@@ -76,15 +74,11 @@ namespace MaduMänguLoomine
             Point head = GetNextPoint();
             if (head.IsHit(food))
             {
-                food.sym = head.sym;
                 pList.Add(food);
                 return true;
             }
             else
                 return false;
         }
-
-        
-
     }
 }
