@@ -41,8 +41,10 @@ namespace MaduMänguLoomine
             char[] food_Symbols = { '♠', '♣', '♥', '♦' };
             FoodCreator foodCreator = new FoodCreator(80, 25, food_Symbols);
             List<Point> foodItems = foodCreator.food_for_snake(4);
-            Point food = foodCreator.CreateFood();
-            food.Draw();
+            foreach (var food in foodItems)
+            {
+                food.Draw(); 
+            }
 
             while (true)
             {
@@ -62,20 +64,15 @@ namespace MaduMänguLoomine
                         Point newFood = foodCreator.CreateFood();
                         foodItems[i] = newFood;
                         newFood.Draw();
-                        food = foodCreator.CreateFood();
-                        food.Draw();
                     }
                 }
-                if (snake.Eat(food))
-                {
-                    
-
-                    
-                    IWavePlayer kusanie = new WaveOutEvent();
-                    AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
-                    kusanie.Init(file);
-                    kusanie.Play();
-                }
+                //if (snake.Eat(foodItems))
+                //{
+                //    IWavePlayer kusanie = new WaveOutEvent();
+                //    AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
+                //    kusanie.Init(file);
+                //    kusanie.Play();
+                //}
                 snake.Move();
                 Thread.Sleep(100);
                 if (Console.KeyAvailable)
@@ -90,7 +87,3 @@ namespace MaduMänguLoomine
         }
     }
 }
-
-
-
-
