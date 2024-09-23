@@ -41,9 +41,10 @@ namespace MaduMänguLoomine
             char[] food_Symbols = { '♠', '♣', '♥', '♦' };
             FoodCreator foodCreator = new FoodCreator(80, 25, food_Symbols);
             List<Point> foodItems = foodCreator.food_for_snake(4);
+            
             foreach (var food in foodItems)
             {
-                food.Draw(); 
+                food.Draw();
             }
 
             while (true)
@@ -76,7 +77,6 @@ namespace MaduMänguLoomine
                 snake.Move();
                 Thread.Sleep(100);
                 if (Console.KeyAvailable)
-
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
