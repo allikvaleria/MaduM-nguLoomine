@@ -1,4 +1,4 @@
-﻿using MaduMänguLoomine;
+using MaduMänguLoomine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +9,17 @@ namespace MaduMänguLoomine
 {
     class Snake : Figure
     {
-        public Direction direction;
+        private Direction direction;
+        private ConsoleColor color;
 
-        public Snake(Point tail, int length, Direction _direction)
+        public Snake(Point startPoint, int length, Direction direction, ConsoleColor color)
         {
-            direction = _direction;
-            pList = new List<Point>();
+            this.direction = direction;
+            this.color = color;
+            pList = new List<Point> { startPoint };
             for (int i = 0; i < length; i++)
             {
-                Point p = new Point(tail);
+                Point p = new Point(startPoint);
                 p.Move(i, direction);
                 pList.Add(p);
             }
@@ -29,22 +31,21 @@ namespace MaduMänguLoomine
             pList.Remove(tail);
             Point head = GetNextPoint();
             pList.Add(head);
-
+            Console.ForegroundColor = color;
             tail.Clear();
             head.Draw();
-
-            //Teine iseseisev uue funktsiooni lisamine koodi.
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ResetColor();
         }
 
         public Point GetNextPoint()
         {
             Point head = pList.Last();
-            pList.Last().sym = '=';
+            pList.Last().sym = '*';
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
             return nextPoint;
         }
+
 
         internal bool IsHitTail()
         {
@@ -79,6 +80,16 @@ namespace MaduMänguLoomine
             }
             else
                 return false;
+        }
+
+        public void Drow()
+        {
+            foreach (var point in pList)
+            {
+                Console.ForegroundColor = color;
+                point.Draw();
+            }
+            Console.ResetColor();
         }
     }
 }
