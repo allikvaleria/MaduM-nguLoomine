@@ -15,17 +15,22 @@ namespace MaduMänguLoomine
     {
         static void Main(string[] args)
         {
-
             Players players = new Players();
-            Console.WriteLine("Start game? (1 - Yes, 2 - No)");
+            Sound sound = new Sound("../../../");
+            sound.Play("../../../fonovaya.mp3");
+
+            Console.WriteLine("Kas alustada mängu? \n1 - Yes 2 - No");
             string userInput = Console.ReadLine();
-            Console.Write("Sisesta oma nimi: ");
+
+            Console.Write("Sisesta oma nimi : ");
             string playerName = Console.ReadLine();
             Start start = new Start();
-            Console.ReadLine();
-
             Score score = new Score();
 
+            Console.WriteLine("Выберите цвет змейки: \n1 - Красный \n2 - Зеленый \n3 - Синий \n4 - Желтый ");
+            ColorManager colorManager = new ColorManager();
+            int colorOption = int.Parse(Console.ReadLine());
+            ConsoleColor snakeColor = colorManager.ChooseSnakeColor(colorOption);
 
             Console.Clear();
 
@@ -34,8 +39,8 @@ namespace MaduMänguLoomine
             walls.Draw();
 
             //Punktide joonistamine 
-            Point p = new Point(4, 5, '=');
-            Snake snake = new Snake(p, 4, Direction.Right);
+            Point p = new Point(4, 5, '~');
+            Snake snake = new Snake(p, 4, Direction.Right, snakeColor);
             snake.Draw();
 
             char[] food_Symbols = { '♠', '♣', '♥', '♦' };
@@ -51,6 +56,8 @@ namespace MaduMänguLoomine
             {
                 if (walls.IsHit(snake) || snake.IsHitTail())
                 {
+                    sound.PlayGameOver();
+                    Thread.Sleep(1000);
 
                     players.Salvesta_faili(playerName, score);
                     break;
@@ -61,19 +68,13 @@ namespace MaduMänguLoomine
                     {
                         score.Score_points(foodItems[i].sym);
                         score.Scored();
+                        sound.PlayEat();
                         //Kui toit on söödud, loome selle uude kohta (Если еда съедена, создаём её на новом месте)
                         Point newFood = foodCreator.CreateFood();
                         foodItems[i] = newFood;
                         newFood.Draw();
                     }
                 }
-                //if (snake.Eat(foodItems))
-                //{
-                //    IWavePlayer kusanie = new WaveOutEvent();
-                //    AudioFileReader file = new AudioFileReader("../../../poedanie.mp3");
-                //    kusanie.Init(file);
-                //    kusanie.Play();
-                //}
                 snake.Move();
                 Thread.Sleep(100);
                 if (Console.KeyAvailable)
@@ -82,6 +83,8 @@ namespace MaduMänguLoomine
                     snake.HandleKey(key.Key);
                 }
             }
+            sound.Stop();
+            sound.PlayGameOver();
             Console.Clear();
             players.Naitab_faili();
         }
