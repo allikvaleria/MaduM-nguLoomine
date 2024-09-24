@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ namespace MaduMänguLoomine
     {
         public static void ShowStartScreen()
         {
-            Console.WriteLine("Start game? (1 - Yes, 2 - No)");
+            Console.WriteLine("Start game? \n1 - Yes 2 - No");
             string userInput = Console.ReadLine();
 
             if (userInput == "1")
